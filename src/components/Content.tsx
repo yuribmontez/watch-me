@@ -1,13 +1,14 @@
 import { Header } from "./Header"
 import { MovieCard } from './MovieCard';
 import { MovieProps } from '../App'
+import { memo } from 'react'
 
 interface ContentProps {
   movies: Array<MovieProps>;
   genreTitle: string;
 }
 
-export function Content({ movies, genreTitle }: ContentProps) {
+export function ContentComponent({ movies, genreTitle }: ContentProps) {
   return (
     <div className="container">
       <Header title={genreTitle} />
@@ -21,3 +22,7 @@ export function Content({ movies, genreTitle }: ContentProps) {
     </div>
   )
 }
+
+export const Content = memo(ContentComponent, (prevProps, nextProps) => {
+  return Object.is(prevProps.movies, nextProps.movies)
+})
